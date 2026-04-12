@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Service Request Form</title>
+
+<style>
+  body {
+    font-family: Arial;
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .container {
+    background: #fff;
+    width: 100%;
+    max-width: 750px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  input, select, textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+  textarea {
+    grid-column: span 2;
+    height: 90px;
+  }
+
+  .full {
+    grid-column: span 2;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #1e4fd1;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Service Request Form</h2>
+
+  <form id="leadForm">
+
+    <div class="grid">
+
+      <!-- CONTRACTOR INFO -->
+      <input name="contractor_id" placeholder="Contractor ID (C004)" />
+      <input name="contractor_name" placeholder="Contractor Name (Jenny Doe)" />
+
+      <input name="directory_id" placeholder="Directory ID (D123)" />
+      <input name="lead_source" placeholder="Lead Source (Convert Pages)" />
+
+      <input name="page_url" placeholder="Page URL" />
+
+      <!-- CUSTOMER INFO -->
+      <input name="full_name" placeholder="Full Name" required />
+      <input name="phone" placeholder="Phone Number" required />
+
+      <input name="email" placeholder="Email Address" />
+      <input name="city" placeholder="City" />
+
+      <input name="address" class="full" placeholder="Full Address" />
+
+      <!-- SERVICE INFO -->
+      <select name="service_type">
+        <option value="">Service Type</option>
+        <option>Plumbing</option>
+        <option>Electrical</option>
+        <option>Cleaning</option>
+      </select>
+
+      <select name="urgency">
+        <option value="">Urgency</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
+
+      <textarea name="issue_summary" placeholder="Describe your issue"></textarea>
+
+      <!-- CONTACT PREF -->
+      <input name="preferred_contact_method" placeholder="Preferred Contact Method" />
+      <input name="best_time_to_call" placeholder="Best Time to Call" />
+
+      <div class="full">
+        <label>
+          <input type="checkbox" name="consent_sms" />
+          I agree to receive SMS updates
+        </label>
+      </div>
+
+    </div>
+
+    <button type="submit">Submit Request</button>
+  </form>
+</div>
+
+<script>
+document.getElementById("leadForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData);
+
+  // fix checkbox
+  data.consent_sms = this.consent_sms.checked;
+
+  // auto page URL
+  data.page_url = window.location.href;
+
+  // send to n8n webhook
+  await fetch("https://chaity.app.n8n.cloud/webhook-test/scanfix-lead", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+  alert("Form submitted successfully!");
+  this.reset();
+});
+</script>
+
+
+</body>
+</html>

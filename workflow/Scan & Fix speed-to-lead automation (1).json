@@ -10,10 +10,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
-        0
+        -1456,
+        96
       ],
-      "id": "44949fea-e38a-4883-bfa1-b80732d883d6",
+      "id": "79418df5-fb3a-4b53-ade7-66a410b8df7d",
       "name": "Webhook",
       "webhookId": "10cd93f0-1a26-48ff-8f55-b21c09227f4f"
     },
@@ -172,10 +172,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        208,
-        0
+        -1248,
+        96
       ],
-      "id": "b67580be-ed37-4be3-bedf-893c836c386d",
+      "id": "c92fc076-7b17-4578-9bf7-6dcd370ff5ac",
       "name": "Edit Fields"
     },
     {
@@ -476,31 +476,30 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        416,
-        0
+        -1040,
+        96
       ],
-      "id": "0e46e0bc-9443-48a3-bfff-b072b784dc6c",
+      "id": "36df988f-ddea-4713-b805-869fb0afd844",
       "name": "Append row in sheet",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "XKdbivtt9GGCEPOE",
-          "name": "Google Sheets OAuth2 API"
+          "id": "3ayQN5Q4gzqmN9MN",
+          "name": "Google Sheets account"
         }
       }
     },
     {
       "parameters": {
-        "amount": 1,
         "unit": "minutes"
       },
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1248,
-        0
+        -208,
+        96
       ],
-      "id": "96893d90-beeb-4c90-8b41-4061aaf473a8",
+      "id": "94e36456-63b7-45a2-9957-be0240c561fa",
       "name": "Wait",
       "webhookId": "9c0048a7-0322-45d7-8a75-d18e15bd8f90"
     },
@@ -532,63 +531,63 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1456,
-        0
+        0,
+        96
       ],
-      "id": "4f2c9569-cb41-4fa5-bdb7-58b118db431a",
+      "id": "2813f256-7166-43e8-af5a-58138aacf840",
       "name": "If"
     },
     {
       "parameters": {
-        "sendTo": "={{$node[\"Edit Fields\"].json[\"email\"]}}",
+        "sendTo": "={{ $('Append row in sheet').item.json.email }}",
         "subject": "Scan & Fix – Request Received",
         "emailType": "text",
-        "message": "=Hi {{$json[\"full_name\"]}},  Thank you for contacting Scan & Fix.  We have successfully received your {{$json[\"service_type\"]}} request.  Issue Summary: {{$json[\"issue_summary\"]}}  Our contractor team will contact you shortly. \nBest regards, \nScan & Fix Team",
+        "message": "=Hi {{ $('Edit Fields').item.json.full_name }} ,\n\nThank you for contacting Scan & Fix.\n\nWe have successfully received your {{ $('Edit Fields').item.json.service_type }} request and our team has recorded the details for review.\n\nIssue Summary:\n{{ $('Edit Fields').item.json.issue_summary }}\n\nOne of our verified contractors will review your request and reach out to you shortly to assist further.\n\nBest regards,  \nScan & Fix Team",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        832,
-        0
+        -624,
+        96
       ],
-      "id": "58d295f2-e60b-4399-81fc-f1d6f1fabe02",
+      "id": "9b80a116-f3fa-4f05-b5eb-e870926853ac",
       "name": "Homewoner Email",
       "webhookId": "1d929671-292c-4760-9df7-1e49501d54e1",
       "credentials": {
         "gmailOAuth2": {
-          "id": "0CKl7D6SHblkB1nm",
-          "name": "Gmail OAuth2 API"
+          "id": "KgMdPeneYxWSKLMU",
+          "name": "Gmail account"
         }
       }
     },
     {
       "parameters": {
         "sendTo": "kunduchaity123@gmail.com",
-        "subject": "=New Lead: {{$node[\"Edit Fields\"].json[\"full_name\"]}}",
+        "subject": "=New Lead Assigned: {{$node[\"Edit Fields\"].json[\"full_name\"]}}",
         "emailType": "text",
-        "message": "=Hello {{$node[\"Edit Fields\"].json[\"contractor_name\"]}},\n\nThis is a reminder that the lead below is still marked as NEW:\n\nName: {{$node[\"Edit Fields\"].json[\"full_name\"]}}\nPhone: {{$node[\"Edit Fields\"].json[\"phone\"]}}\nEmail: {{$node[\"Edit Fields\"].json[\"email\"]}}\nService: {{$node[\"Edit Fields\"].json[\"service_type\"]}}\nUrgency: {{$node[\"Edit Fields\"].json[\"urgency\"]}}\nIssue Summary: {{$node[\"Edit Fields\"].json[\"issue_summary\"]}}\n\nPlease follow up as soon as possible.\n\nBest regards,\nScan & Fix System\n",
+        "message": "=Hello {{$node[\"Edit Fields\"].json[\"contractor_name\"]}},\n\nThis is a reminder that a lead assigned to you is still marked as NEW and requires follow-up.\n\nLead Details:\n\nName: {{$node[\"Edit Fields\"].json[\"full_name\"]}}\nPhone: {{$node[\"Edit Fields\"].json[\"phone\"]}}\nEmail: {{$node[\"Edit Fields\"].json[\"email\"]}}\nService Type: {{$node[\"Edit Fields\"].json[\"service_type\"]}}\nUrgency Level: {{$node[\"Edit Fields\"].json[\"urgency\"]}}\n\nIssue Summary:\n{{$node[\"Edit Fields\"].json[\"issue_summary\"]}}\n\nWe recommend reaching out to the homeowner as soon as possible to ensure timely service and improved customer satisfaction.\n\nBest regards,  \nScan & Fix System",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1040,
-        0
+        -416,
+        96
       ],
-      "id": "1bf36ce1-17ee-4fb8-9109-a3658be2b269",
+      "id": "2c316c26-4aa5-4468-b678-70d839d3202f",
       "name": "Contractor alert email",
       "webhookId": "38dfeaca-f22b-4e54-9bc2-3278b50513da",
       "credentials": {
         "gmailOAuth2": {
-          "id": "0CKl7D6SHblkB1nm",
-          "name": "Gmail OAuth2 API"
+          "id": "KgMdPeneYxWSKLMU",
+          "name": "Gmail account"
         }
       }
     },
     {
       "parameters": {
-        "sendTo": "chaitykundu323@gmail.com",
+        "sendTo": "kunduchaity123@gmail.com",
         "subject": "=Reminder: New Lead {{$node[\"Edit Fields\"].json[\"full_name\"]}} Still Pending",
         "emailType": "text",
         "message": "=Hello {{$node[\"Edit Fields\"].json[\"contractor_name\"]}},\n\nThis is a reminder that the lead below is still marked as NEW:\n\nName: {{$node[\"Edit Fields\"].json[\"full_name\"]}}\nPhone: {{$node[\"Edit Fields\"].json[\"phone\"]}}\nEmail: {{$node[\"Edit Fields\"].json[\"email\"]}}\nService: {{$node[\"Edit Fields\"].json[\"service_type\"]}}\nUrgency: {{$node[\"Edit Fields\"].json[\"urgency\"]}}\nIssue Summary: {{$node[\"Edit Fields\"].json[\"issue_summary\"]}}\n\nPlease follow up as soon as possible.\n\nBest regards,\nScan & Fix System\n",
@@ -597,37 +596,37 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1664,
-        -96
+        208,
+        0
       ],
-      "id": "7da95894-e305-4873-999c-dfd7e05599c6",
+      "id": "f0154764-cdd4-4e19-bd9c-6973a7b02c2e",
       "name": "Remider message",
       "webhookId": "d29ca9aa-dcc8-40e7-8728-6368b2775dd5",
       "credentials": {
         "gmailOAuth2": {
-          "id": "0CKl7D6SHblkB1nm",
-          "name": "Gmail OAuth2 API"
+          "id": "KgMdPeneYxWSKLMU",
+          "name": "Gmail account"
         }
       }
     },
     {
       "parameters": {
         "from": "+16783264184",
-        "to": "={{$node[\"Edit Fields\"].json[\"phone\"]}}",
-        "message": "Hello Dewave, ",
+        "to": "={{ $json.phone }}",
+        "message": "=Scan & Fix:  \nHello {{$node[\"Edit Fields\"].json[\"full_name\"]}},  \nYour {{$node[\"Edit Fields\"].json[\"service_type\"]}} request has been successfully received and recorded.  \nOur verified contractor team is reviewing your case: \n{{$node[\"Edit Fields\"].json[\"issue_summary\"]}} \n \nYou will be contacted shortly for the next steps. \n \n– Scan & Fix Team",
         "options": {}
       },
       "type": "n8n-nodes-base.twilio",
       "typeVersion": 1,
       "position": [
-        624,
-        0
+        -832,
+        96
       ],
-      "id": "132c5b5a-88c2-4458-923b-92970cfe1334",
+      "id": "235e5653-c537-4674-9eb9-c1ae51b7e5ee",
       "name": "Send an SMS/MMS/WhatsApp message",
       "credentials": {
         "twilioApi": {
-          "id": "lOOZYgaQW6FCjAaa",
+          "id": "7ufXTnlXuz8kzehL",
           "name": "Twilio account"
         }
       }
@@ -729,11 +728,11 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "f8ad8915-0a8a-402b-9072-456b00697c13",
+  "versionId": "9bd909a6-415f-4b24-b73f-c61680769073",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "37e965d98bfb344f1c03b52c0eb1ca255dfd8ae1b71cc3c045044b351dcb70eb"
+    "instanceId": "4432878bdd0b70c955cf0077b63ec4509cdc6af71a147560d84a1a1be0ff75dd"
   },
-  "id": "vODio2UMMubv5pjl",
+  "id": "tDM4WTTmikAth2uA",
   "tags": []
 }

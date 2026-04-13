@@ -10,10 +10,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1456,
+        -1664,
         96
       ],
-      "id": "79418df5-fb3a-4b53-ade7-66a410b8df7d",
+      "id": "7a894601-1fb5-43c1-b864-05ce3c654661",
       "name": "Webhook",
       "webhookId": "10cd93f0-1a26-48ff-8f55-b21c09227f4f"
     },
@@ -172,10 +172,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1248,
+        -1456,
         96
       ],
-      "id": "c92fc076-7b17-4578-9bf7-6dcd370ff5ac",
+      "id": "f63fc6c3-0b29-4ff6-8f32-d18cdbef0468",
       "name": "Edit Fields"
     },
     {
@@ -476,10 +476,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1040,
+        -1248,
         96
       ],
-      "id": "36df988f-ddea-4713-b805-869fb0afd844",
+      "id": "bf3cd014-8deb-40f3-bbca-c78bff698f8e",
       "name": "Append row in sheet",
       "alwaysOutputData": true,
       "credentials": {
@@ -496,10 +496,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -208,
+        -416,
         96
       ],
-      "id": "94e36456-63b7-45a2-9957-be0240c561fa",
+      "id": "953e6c30-e193-45f7-ad92-45269fce5fd6",
       "name": "Wait",
       "webhookId": "9c0048a7-0322-45d7-8a75-d18e15bd8f90"
     },
@@ -531,10 +531,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        0,
+        -208,
         96
       ],
-      "id": "2813f256-7166-43e8-af5a-58138aacf840",
+      "id": "c603a8f4-f796-4e53-89cf-e36b1f36e8f3",
       "name": "If"
     },
     {
@@ -542,16 +542,18 @@
         "sendTo": "={{ $('Append row in sheet').item.json.email }}",
         "subject": "Scan & Fix – Request Received",
         "emailType": "text",
-        "message": "=Hi {{ $('Edit Fields').item.json.full_name }} ,\n\nThank you for contacting Scan & Fix.\n\nWe have successfully received your {{ $('Edit Fields').item.json.service_type }} request and our team has recorded the details for review.\n\nIssue Summary:\n{{ $('Edit Fields').item.json.issue_summary }}\n\nOne of our verified contractors will review your request and reach out to you shortly to assist further.\n\nBest regards,  \nScan & Fix Team",
-        "options": {}
+        "message": "=Hi {{ $('Edit Fields').item.json.full_name }},\n\nThank you for contacting Scan & Fix.\n\nWe have successfully received your {{ $('Edit Fields').item.json.service_type }} request and our team has recorded the details for review.\n\nIssue Summary:\n{{ $('Edit Fields').item.json.issue_summary }}\n\nOne of our verified contractors will review your request and reach out to you shortly to assist further.\n\nBest regards,  \nScan & Fix Team",
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        -624,
+        -832,
         96
       ],
-      "id": "9b80a116-f3fa-4f05-b5eb-e870926853ac",
+      "id": "18184f53-8d6d-49a4-a9f0-a11a04a7a2da",
       "name": "Homewoner Email",
       "webhookId": "1d929671-292c-4760-9df7-1e49501d54e1",
       "credentials": {
@@ -567,15 +569,17 @@
         "subject": "=New Lead Assigned: {{$node[\"Edit Fields\"].json[\"full_name\"]}}",
         "emailType": "text",
         "message": "=Hello {{$node[\"Edit Fields\"].json[\"contractor_name\"]}},\n\nThis is a reminder that a lead assigned to you is still marked as NEW and requires follow-up.\n\nLead Details:\n\nName: {{$node[\"Edit Fields\"].json[\"full_name\"]}}\nPhone: {{$node[\"Edit Fields\"].json[\"phone\"]}}\nEmail: {{$node[\"Edit Fields\"].json[\"email\"]}}\nService Type: {{$node[\"Edit Fields\"].json[\"service_type\"]}}\nUrgency Level: {{$node[\"Edit Fields\"].json[\"urgency\"]}}\n\nIssue Summary:\n{{$node[\"Edit Fields\"].json[\"issue_summary\"]}}\n\nWe recommend reaching out to the homeowner as soon as possible to ensure timely service and improved customer satisfaction.\n\nBest regards,  \nScan & Fix System",
-        "options": {}
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        -416,
+        -624,
         96
       ],
-      "id": "2c316c26-4aa5-4468-b678-70d839d3202f",
+      "id": "aec86b35-ff09-45ae-a5e5-5bf79cbcb48f",
       "name": "Contractor alert email",
       "webhookId": "38dfeaca-f22b-4e54-9bc2-3278b50513da",
       "credentials": {
@@ -591,15 +595,17 @@
         "subject": "=Reminder: New Lead {{$node[\"Edit Fields\"].json[\"full_name\"]}} Still Pending",
         "emailType": "text",
         "message": "=Hello {{$node[\"Edit Fields\"].json[\"contractor_name\"]}},\n\nThis is a reminder that the lead below is still marked as NEW:\n\nName: {{$node[\"Edit Fields\"].json[\"full_name\"]}}\nPhone: {{$node[\"Edit Fields\"].json[\"phone\"]}}\nEmail: {{$node[\"Edit Fields\"].json[\"email\"]}}\nService: {{$node[\"Edit Fields\"].json[\"service_type\"]}}\nUrgency: {{$node[\"Edit Fields\"].json[\"urgency\"]}}\nIssue Summary: {{$node[\"Edit Fields\"].json[\"issue_summary\"]}}\n\nPlease follow up as soon as possible.\n\nBest regards,\nScan & Fix System\n",
-        "options": {}
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        208,
+        0,
         0
       ],
-      "id": "f0154764-cdd4-4e19-bd9c-6973a7b02c2e",
+      "id": "ef01409e-33a6-459a-b339-6df41b628c22",
       "name": "Remider message",
       "webhookId": "d29ca9aa-dcc8-40e7-8728-6368b2775dd5",
       "credentials": {
@@ -619,10 +625,10 @@
       "type": "n8n-nodes-base.twilio",
       "typeVersion": 1,
       "position": [
-        -832,
+        -1040,
         96
       ],
-      "id": "235e5653-c537-4674-9eb9-c1ae51b7e5ee",
+      "id": "c10cb3c2-c1e2-4346-9140-8740232dca13",
       "name": "Send an SMS/MMS/WhatsApp message",
       "credentials": {
         "twilioApi": {
@@ -728,11 +734,10 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "9bd909a6-415f-4b24-b73f-c61680769073",
+  "versionId": "8878edf4-bb6c-419e-9e17-54f2d15219b7",
   "meta": {
-    "templateCredsSetupCompleted": true,
     "instanceId": "4432878bdd0b70c955cf0077b63ec4509cdc6af71a147560d84a1a1be0ff75dd"
   },
-  "id": "tDM4WTTmikAth2uA",
+  "id": "9vNPNzPSfF12O5z9",
   "tags": []
 }

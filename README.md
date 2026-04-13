@@ -59,7 +59,7 @@ This system uses Google Sheets as a lightweight database.
 
 ### 📞 Communication Preferences
 
-* `preferred_contact_method` → Email / SMS / Call
+* `preferred_contact_method` → Email / SMS 
 * `best_time_to_call` → Preferred calling time
 * `consent_sms` → YES / NO (used for SMS compliance control)
 

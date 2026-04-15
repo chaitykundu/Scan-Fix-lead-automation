@@ -10,10 +10,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1664,
-        96
+        -1792,
+        112
       ],
-      "id": "7a894601-1fb5-43c1-b864-05ce3c654661",
+      "id": "b464963d-75e0-4eba-947b-2c409b7b3e8e",
       "name": "Webhook",
       "webhookId": "10cd93f0-1a26-48ff-8f55-b21c09227f4f"
     },
@@ -172,10 +172,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1456,
-        96
+        -1584,
+        112
       ],
-      "id": "f63fc6c3-0b29-4ff6-8f32-d18cdbef0468",
+      "id": "dab92be5-9d32-4bbc-ada4-8bcc94f1701b",
       "name": "Edit Fields"
     },
     {
@@ -456,16 +456,6 @@
               "type": "string",
               "canBeUsedToMatch": true,
               "removed": false
-            },
-            {
-              "id": "notes",
-              "displayName": "notes",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -476,10 +466,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1248,
-        96
+        -1376,
+        112
       ],
-      "id": "bf3cd014-8deb-40f3-bbca-c78bff698f8e",
+      "id": "cce450c3-2205-495b-9734-c90b3dd6a0bc",
       "name": "Append row in sheet",
       "alwaysOutputData": true,
       "credentials": {
@@ -496,10 +486,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -416,
-        96
+        -544,
+        112
       ],
-      "id": "953e6c30-e193-45f7-ad92-45269fce5fd6",
+      "id": "1c252455-2609-4b1f-b5ea-9514c49e406e",
       "name": "Wait",
       "webhookId": "9c0048a7-0322-45d7-8a75-d18e15bd8f90"
     },
@@ -531,10 +521,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -208,
-        96
+        -288,
+        112
       ],
-      "id": "c603a8f4-f796-4e53-89cf-e36b1f36e8f3",
+      "id": "a100bdf9-f9d3-42ee-a877-138a2d895a32",
       "name": "If"
     },
     {
@@ -550,10 +540,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        -832,
-        96
+        -960,
+        112
       ],
-      "id": "18184f53-8d6d-49a4-a9f0-a11a04a7a2da",
+      "id": "45033387-1667-4eb7-9fc1-57c3de49ced6",
       "name": "Homewoner Email",
       "webhookId": "1d929671-292c-4760-9df7-1e49501d54e1",
       "credentials": {
@@ -565,7 +555,7 @@
     },
     {
       "parameters": {
-        "sendTo": "kunduchaity123@gmail.com",
+        "sendTo": "abc123@gmail.com",
         "subject": "=New Lead Assigned: {{$node[\"Edit Fields\"].json[\"full_name\"]}}",
         "emailType": "text",
         "message": "=Hello {{$node[\"Edit Fields\"].json[\"contractor_name\"]}},\n\nThis is a reminder that a lead assigned to you is still marked as NEW and requires follow-up.\n\nLead Details:\n\nName: {{$node[\"Edit Fields\"].json[\"full_name\"]}}\nPhone: {{$node[\"Edit Fields\"].json[\"phone\"]}}\nEmail: {{$node[\"Edit Fields\"].json[\"email\"]}}\nService Type: {{$node[\"Edit Fields\"].json[\"service_type\"]}}\nUrgency Level: {{$node[\"Edit Fields\"].json[\"urgency\"]}}\n\nIssue Summary:\n{{$node[\"Edit Fields\"].json[\"issue_summary\"]}}\n\nWe recommend reaching out to the homeowner as soon as possible to ensure timely service and improved customer satisfaction.\n\nBest regards,  \nScan & Fix System",
@@ -576,10 +566,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        -624,
-        96
+        -752,
+        112
       ],
-      "id": "aec86b35-ff09-45ae-a5e5-5bf79cbcb48f",
+      "id": "3bb3aa04-f4b2-4630-a43e-56d7c2a0110d",
       "name": "Contractor alert email",
       "webhookId": "38dfeaca-f22b-4e54-9bc2-3278b50513da",
       "credentials": {
@@ -591,7 +581,7 @@
     },
     {
       "parameters": {
-        "sendTo": "kunduchaity123@gmail.com",
+        "sendTo": "abc123@gmail.com",
         "subject": "=Reminder: New Lead {{$node[\"Edit Fields\"].json[\"full_name\"]}} Still Pending",
         "emailType": "text",
         "message": "=Hello {{$node[\"Edit Fields\"].json[\"contractor_name\"]}},\n\nThis is a reminder that the lead below is still marked as NEW:\n\nName: {{$node[\"Edit Fields\"].json[\"full_name\"]}}\nPhone: {{$node[\"Edit Fields\"].json[\"phone\"]}}\nEmail: {{$node[\"Edit Fields\"].json[\"email\"]}}\nService: {{$node[\"Edit Fields\"].json[\"service_type\"]}}\nUrgency: {{$node[\"Edit Fields\"].json[\"urgency\"]}}\nIssue Summary: {{$node[\"Edit Fields\"].json[\"issue_summary\"]}}\n\nPlease follow up as soon as possible.\n\nBest regards,\nScan & Fix System\n",
@@ -602,10 +592,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        0,
-        0
+        32,
+        48
       ],
-      "id": "ef01409e-33a6-459a-b339-6df41b628c22",
+      "id": "5771b710-e039-4225-8a0b-73062468f410",
       "name": "Remider message",
       "webhookId": "d29ca9aa-dcc8-40e7-8728-6368b2775dd5",
       "credentials": {
@@ -625,10 +615,10 @@
       "type": "n8n-nodes-base.twilio",
       "typeVersion": 1,
       "position": [
-        -1040,
-        96
+        -1168,
+        112
       ],
-      "id": "c10cb3c2-c1e2-4346-9140-8740232dca13",
+      "id": "563956c8-f490-4720-a53f-790f8386b2d2",
       "name": "Send an SMS/MMS/WhatsApp message",
       "credentials": {
         "twilioApi": {
@@ -734,10 +724,11 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "8878edf4-bb6c-419e-9e17-54f2d15219b7",
+  "versionId": "5e9ae5b3-1def-4d5e-b77d-30d740748700",
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "4432878bdd0b70c955cf0077b63ec4509cdc6af71a147560d84a1a1be0ff75dd"
   },
-  "id": "9vNPNzPSfF12O5z9",
+  "id": "UcOqUuoUYV2rzbFq",
   "tags": []
 }
